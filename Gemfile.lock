@@ -381,10 +381,6 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 4.0)
       websocket (~> 1.0)
-    solid_cache (1.0.10)
-      activejob (>= 7.2)
-      activerecord (>= 7.2)
-      railties (>= 7.2)
     sqlite3 (2.8.1)
       mini_portile2 (~> 2.8.0)
     sqlite3 (2.8.1-aarch64-linux-gnu)
@@ -473,7 +469,6 @@ DEPENDENCIES
   rubocop-rspec
   ruby-lsp-rspec
   selenium-webdriver
-  solid_cache
   sqlite3 (>= 2.1)
   stackprof
   stimulus-rails
