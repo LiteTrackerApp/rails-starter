@@ -11,7 +11,7 @@ import { Toaster } from "@/components/ui/sonner"
 
 import dashboardData from "@/data/dashboard-data.json"
 
-export default function DashboardPage({ currentUser }) {
+export default function DashboardPage({ currentUser, csrfToken }) {
   return (
     <>
       <SidebarProvider
@@ -22,7 +22,7 @@ export default function DashboardPage({ currentUser }) {
       >
         <AppSidebar variant="inset" currentUser={currentUser} />
         <SidebarInset>
-          <SiteHeader currentUser={currentUser} />
+          <SiteHeader currentUser={currentUser} csrfToken={csrfToken} />
           <div className="flex flex-1 flex-col">
             <div className="@container/main flex flex-1 flex-col gap-2">
               <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
