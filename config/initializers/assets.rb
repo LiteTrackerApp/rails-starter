@@ -10,3 +10,4 @@ Rails.application.config.assets.paths << Rails.root.join("node_modules/bootstrap
 Rails.application.config.assets.paths << Rails.root.join("node_modules/@fortawesome/fontawesome-free/webfonts")
 Rails.application.config.assets.paths << Rails.root.join("node_modules/jsvectormap/dist")
 Rails.application.config.assets.precompile << "bootstrap.bundle.min.js"
+Rails.application.config.assets.precompile << "shadcn.css"
