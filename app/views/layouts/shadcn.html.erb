@@ -20,9 +20,6 @@
   </head>
 
   <body class="min-h-screen bg-background font-sans text-foreground antialiased">
-    <script type="application/json" id="shadcn-root-props">
-      <%= raw({ currentUser: user_signed_in? ? { name: current_user.name.presence || current_user.email, email: current_user.email, profilePath: edit_user_path(current_user), changePasswordPath: edit_user_registration_path, spacesPath: spaces_path, setupPath: edit_setup_path, adminPath: rails_admin_path, logoutPath: destroy_user_session_path, avatarUrl: "/avatars/default.jpg", multiTenantMode: multi_tenant_mode?, isAdmin: current_user.admin? } : nil, csrfToken: form_authenticity_token }.to_json) %>
-    </script>
     <div id="shadcn-root">
       <%= yield %>
     </div>
