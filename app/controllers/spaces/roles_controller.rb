@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class Spaces::RolesController < ApplicationController
+  include SpaceLayout
   before_action :set_role, only: %i[show edit update destroy]
-  before_action :set_space, only: %i[index edit update new create]
+  before_action :set_space
 
   # GET /roles or /roles.json
   def index

@@ -1,10 +1,12 @@
 import {
-  IconCreditCard,
-  IconDotsVertical,
-  IconLogout,
-  IconNotification,
-  IconUserCircle,
-} from "@tabler/icons-react"
+  BadgeCheck,
+  Bell,
+  ChevronsUpDown,
+  CreditCard,
+  LayoutGrid,
+  LogOut,
+  Sparkles,
+} from "lucide-react"
 
 import {
   Avatar,
@@ -29,6 +31,7 @@ import {
 
 export function NavUser({ user, logoutPath, logoutFormId }) {
   const { isMobile } = useSidebar()
+  const hasProfilePath = user?.profilePath || user?.changePasswordPath || user?.spacesPath
 
   return (
     <SidebarMenu>
@@ -37,74 +40,119 @@ export function NavUser({ user, logoutPath, logoutFormId }) {
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
-              <Avatar className="h-8 w-8 rounded-lg grayscale">
-                <AvatarImage src={user.avatar} alt={user.name} />
-                <AvatarFallback className="rounded-lg">{user.name?.slice(0, 2).toUpperCase() || "?"}</AvatarFallback>
+              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+            >
+              <Avatar className="h-8 w-8 rounded-lg">
+                <AvatarImage src={user?.avatar} alt={user?.name} />
+                <AvatarFallback className="rounded-lg">
+                  {user?.name?.slice(0, 2).toUpperCase() || "CN"}
+                </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">{user.name}</span>
-                <span className="text-muted-foreground truncate text-xs">
-                  {user.email}
-                </span>
+                <span className="truncate font-medium">{user?.name || "User"}</span>
+                <span className="truncate text-xs">{user?.email || ""}</span>
               </div>
-              <IconDotsVertical className="ml-auto size-4" />
+              <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
             className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
             side={isMobile ? "bottom" : "right"}
             align="end"
-            sideOffset={4}>
+            sideOffset={4}
+          >
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback className="rounded-lg">{user.name?.slice(0, 2).toUpperCase() || "?"}</AvatarFallback>
+                  <AvatarImage src={user?.avatar} alt={user?.name} />
+                  <AvatarFallback className="rounded-lg">
+                    {user?.name?.slice(0, 2).toUpperCase() || "CN"}
+                  </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-medium">{user.name}</span>
-                  <span className="text-muted-foreground truncate text-xs">
-                    {user.email}
-                  </span>
+                  <span className="truncate font-medium">{user?.name || "User"}</span>
+                  <span className="truncate text-xs">{user?.email || ""}</span>
                 </div>
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem asChild>
-                <a href={user.profilePath || "#"}>
-                  <IconUserCircle />
-                  Account
-                </a>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <IconCreditCard />
-                Billing
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <IconNotification />
-                Notifications
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            {logoutPath && logoutFormId && (
+            {hasProfilePath && (
               <>
+                <DropdownMenuGroup>
+                  {user?.profilePath && (
+                    <DropdownMenuItem asChild>
+                      <a href={user.profilePath}>
+                        <BadgeCheck />
+                        Account
+                      </a>
+                    </DropdownMenuItem>
+                  )}
+                  {user?.changePasswordPath && (
+                    <DropdownMenuItem asChild>
+                      <a href={user.changePasswordPath}>
+                        <CreditCard />
+                        Change password
+                      </a>
+                    </DropdownMenuItem>
+                  )}
+                  {user?.multiTenantMode && user?.spacesPath && (
+                    <DropdownMenuItem asChild>
+                      <a href={user.spacesPath}>
+                        <LayoutGrid />
+                        Spaces
+                      </a>
+                    </DropdownMenuItem>
+                  )}
+                </DropdownMenuGroup>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem asChild>
-                  <button
-                    type="button"
-                    onClick={() => document.getElementById(logoutFormId)?.requestSubmit()}
-                    className="flex w-full cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden"
-                  >
-                    <IconLogout />
-                    Log out
-                  </button>
-                </DropdownMenuItem>
               </>
+            )}
+            {!hasProfilePath && (
+              <>
+                <DropdownMenuGroup>
+                  <DropdownMenuItem>
+                    <Sparkles />
+                    Upgrade to Pro
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+                <DropdownMenuSeparator />
+                <DropdownMenuGroup>
+                  <DropdownMenuItem>
+                    <BadgeCheck />
+                    Account
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <CreditCard />
+                    Billing
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Bell />
+                    Notifications
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+                <DropdownMenuSeparator />
+              </>
+            )}
+            {logoutPath && logoutFormId ? (
+              <DropdownMenuItem asChild>
+                <button
+                  type="button"
+                  onClick={() => document.getElementById(logoutFormId)?.requestSubmit()}
+                  className="flex w-full cursor-pointer items-center gap-2"
+                >
+                  <LogOut />
+                  Log out
+                </button>
+              </DropdownMenuItem>
+            ) : (
+              <DropdownMenuItem>
+                <LogOut />
+                Log out
+              </DropdownMenuItem>
             )}
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>
     </SidebarMenu>
-  );
+  )
 }

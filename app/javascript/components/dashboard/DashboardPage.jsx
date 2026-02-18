@@ -39,6 +39,7 @@ export default function DashboardPage({ currentUser, csrfToken }) {
           csrfToken={csrfToken}
           logoutPath={currentUser?.logoutPath}
           logoutFormId={LOGOUT_FORM_ID}
+          newSpacePath={currentUser?.newSpacePath}
         />
         <SidebarInset>
           <SiteHeader currentUser={currentUser} logoutFormId={LOGOUT_FORM_ID} />

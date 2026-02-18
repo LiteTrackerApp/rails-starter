@@ -81,7 +81,9 @@
 
 /* Buttons and links use pointer cursor */
 #shadcn-root button,
-#shadcn-root a[href] {
+#shadcn-root a[href],
+#space-root button,
+#space-root a[href] {
   cursor: pointer;
 }
 

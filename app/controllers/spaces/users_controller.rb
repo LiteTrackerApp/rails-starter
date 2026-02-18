@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Spaces::UsersController < ApplicationController
+  include SpaceLayout
   before_action :set_space, only: %i[index new create edit update destroy]
   before_action :set_user, only: %i[edit update destroy]
   before_action :set_user_role, only: %i[edit update destroy]

@@ -43,6 +43,62 @@ module ApplicationHelper
     App::Config.app.demo_mode
   end
 
+  def space_shadcn_props(content_html = "")
+    return {} unless defined?(@space) && @space
+
+    props = {
+      spaceName: @space.name,
+      spacesPath: spaces_path,
+      newSpacePath: new_space_path,
+      navPaths: {
+        homePath: space_path(@space),
+        usersPath: space_users_path(@space),
+        settingsPath: edit_space_path(@space),
+        rolesPath: space_roles_path(@space),
+        subscriptionsPath: space_subscriptions_path(@space),
+      },
+      breadcrumbTitle: space_breadcrumb_title,
+      contentHtml: content_html,
+      csrfToken: form_authenticity_token,
+    }
+
+    if user_signed_in?
+      props[:currentUser] = {
+        name: current_user.name.presence || current_user.email,
+        email: current_user.email,
+        profilePath: edit_user_path(current_user),
+        changePasswordPath: edit_user_registration_path,
+        spacesPath: spaces_path,
+        newSpacePath: new_space_path,
+        setupPath: edit_setup_path,
+        adminPath: rails_admin_path,
+        logoutPath: destroy_user_session_path,
+        avatarUrl: "/avatars/default.jpg",
+        multiTenantMode: multi_tenant_mode?,
+        isAdmin: current_user.admin?,
+      }
+    else
+      props[:currentUser] = nil
+    end
+
+    props
+  end
+
+  def space_breadcrumb_title
+    case params[:controller]
+    when "spaces"
+      case params[:action]
+      when "show" then "Overview"
+      when "edit", "update" then "Settings"
+      else params[:action].humanize
+      end
+    when "spaces/users" then "Users"
+    when "spaces/roles" then "Roles"
+    when "spaces/subscriptions" then "Subscriptions"
+    else params[:controller].split("/").last.humanize
+    end
+  end
+
   def inline_svg(path, options = {})
     file = File.read(Rails.root.join("app", "assets", "images", path))
     doc = Nokogiri::HTML::DocumentFragment.parse(file)
