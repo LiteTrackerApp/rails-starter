@@ -91,10 +91,24 @@ export function NavUser({
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-              <a href={user.logoutPath || "#"}>
-                <IconLogout />
-                Log out
-              </a>
+              {user.logoutPath && user.csrfToken ? (
+                <form method="post" action={user.logoutPath} className="contents w-full text-left">
+                  <input type="hidden" name="_method" value="delete" />
+                  <input type="hidden" name="authenticity_token" value={user.csrfToken} />
+                  <button
+                    type="submit"
+                    className="flex w-full cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden"
+                  >
+                    <IconLogout />
+                    Log out
+                  </button>
+                </form>
+              ) : (
+                <a href={user.logoutPath || "#"}>
+                  <IconLogout />
+                  Log out
+                </a>
+              )}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

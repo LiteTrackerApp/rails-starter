@@ -20,7 +20,7 @@ export default function DashboardPage({ currentUser, csrfToken }) {
           "--header-height": "calc(var(--spacing) * 12)",
         }}
       >
-        <AppSidebar variant="inset" currentUser={currentUser} />
+        <AppSidebar variant="inset" currentUser={currentUser} csrfToken={csrfToken} />
         <SidebarInset>
           <SiteHeader currentUser={currentUser} csrfToken={csrfToken} />
           <div className="flex flex-1 flex-col">

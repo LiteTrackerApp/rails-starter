@@ -154,10 +154,10 @@ const defaultUser = {
   avatar: "/avatars/default.jpg",
 }
 
-export function AppSidebar({ currentUser, ...props }) {
+export function AppSidebar({ currentUser, csrfToken, ...props }) {
   const user = currentUser
-    ? { ...defaultUser, ...currentUser, avatar: currentUser.avatarUrl || defaultUser.avatar }
-    : defaultUser
+    ? { ...defaultUser, ...currentUser, avatar: currentUser.avatarUrl || defaultUser.avatar, csrfToken }
+    : { ...defaultUser, csrfToken }
 
   return (
     <Sidebar collapsible="offcanvas" {...props}>
