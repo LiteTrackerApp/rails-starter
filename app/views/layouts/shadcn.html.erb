@@ -14,11 +14,14 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
-    <%= javascript_importmap_tags %>
-    <%= stylesheet_link_tag "shadcn", "data-turbo-track": "reload" %>
+    <%= vite_client_tag %>
+    <%= vite_react_refresh_tag %>
+    <%= vite_javascript_tag "shadcn.jsx" %>
   </head>
 
   <body class="min-h-screen bg-background font-sans text-foreground antialiased">
-    <%= yield %>
+    <div id="shadcn-root">
+      <%= yield %>
+    </div>
   </body>
 </html>
