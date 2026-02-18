@@ -77,7 +77,7 @@ export default function SpacePage({
           </header>
           <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
             <div
-              className="space-content min-h-[50vh] flex-1 rounded-xl"
+              className="space-content flex min-h-0 flex-1 flex-col rounded-xl"
               dangerouslySetInnerHTML={contentHtml ? { __html: contentHtml } : undefined}
             />
           </div>

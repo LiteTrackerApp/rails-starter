@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Scan Rails views for Tailwind classes (e.g. space content) */
+@source "../views/**/*.erb";
+
 @custom-variant dark (&:is(.dark *));
 
 /* Shadcn design tokens */

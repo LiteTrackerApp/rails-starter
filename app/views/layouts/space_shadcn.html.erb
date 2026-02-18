@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="light" style="color-scheme: light;">
   <head>
-    <title><%= content_for?(:title) ? "#{yield(:title)} - #{Rails.application.class.module_parent.name}" : Rails.application.class.module_parent.name %></title>
+    <title><%= content_for?(:page_title) ? "#{yield(:page_title)} - #{Rails.application.class.module_parent.name}" : Rails.application.class.module_parent.name %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta charset="utf-8">
 
