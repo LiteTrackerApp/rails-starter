@@ -1,0 +1,17 @@
+<body class="min-h-screen bg-background font-sans text-foreground antialiased">
+  <div class="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
+    <div class="flex w-full max-w-sm flex-col gap-6">
+      <a href="/" class="flex items-center gap-2 self-center">
+        <%= image_tag "undraw_To_the_moon_re_q21i.png", alt: Rails.application.class.module_parent.name, class: "size-8", height: "32", width: "32" %>
+        <span class="text-lg font-semibold"><%= Rails.application.class.module_parent.name %></span>
+      </a>
+      <% if notice %>
+        <div class="rounded-lg border border-green-200 bg-green-50 p-3 text-sm text-green-800"><%= notice %></div>
+      <% end %>
+      <% if alert %>
+        <div class="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-800"><%= alert %></div>
+      <% end %>
+      <%= yield %>
+    </div>
+  </div>
+</body>
