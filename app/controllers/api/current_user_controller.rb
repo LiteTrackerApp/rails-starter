@@ -20,6 +20,7 @@ module Api
         profilePath: edit_user_path(current_user),
         changePasswordPath: edit_user_registration_path,
         spacesPath: spaces_path,
+        newSpacePath: new_space_path,
         setupPath: edit_setup_path,
         adminPath: rails_admin_path,
         logoutPath: destroy_user_session_path,

@@ -79,6 +79,12 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+/* Buttons and links use pointer cursor */
+#shadcn-root button,
+#shadcn-root a[href] {
+  cursor: pointer;
+}
+
 .dark {
   --popover: oklch(0.269 0 0);
   --popover-foreground: oklch(0.985 0 0);

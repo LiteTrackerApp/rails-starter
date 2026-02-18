@@ -174,7 +174,7 @@ export function AppSidebar({ currentUser, csrfToken, logoutPath, logoutFormId, .
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        <NavMain items={data.navMain} newSpacePath={currentUser?.newSpacePath} />
         <NavDocuments items={data.documents} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
