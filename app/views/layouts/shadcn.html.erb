@@ -20,6 +20,9 @@
   </head>
 
   <body class="min-h-screen bg-background font-sans text-foreground antialiased">
+    <script type="application/json" id="shadcn-root-props">
+      <%= raw({ currentUser: user_signed_in? ? { name: current_user.name.presence || current_user.email, email: current_user.email, profilePath: edit_user_path(current_user), logoutPath: destroy_user_session_path, avatarUrl: "/avatars/default.jpg" } : nil }.to_json) %>
+    </script>
     <div id="shadcn-root">
       <%= yield %>
     </div>
