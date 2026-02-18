@@ -27,9 +27,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 
-export function NavUser({
-  user
-}) {
+export function NavUser({ user, logoutPath, logoutFormId }) {
   const { isMobile } = useSidebar()
 
   return (
@@ -89,27 +87,21 @@ export function NavUser({
                 Notifications
               </DropdownMenuItem>
             </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
-              {user.logoutPath && user.csrfToken ? (
-                <form method="post" action={user.logoutPath} className="contents w-full text-left">
-                  <input type="hidden" name="_method" value="delete" />
-                  <input type="hidden" name="authenticity_token" value={user.csrfToken} />
+            {logoutPath && logoutFormId && (
+              <>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
                   <button
-                    type="submit"
+                    type="button"
+                    onClick={() => document.getElementById(logoutFormId)?.requestSubmit()}
                     className="flex w-full cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden"
                   >
                     <IconLogout />
                     Log out
                   </button>
-                </form>
-              ) : (
-                <a href={user.logoutPath || "#"}>
-                  <IconLogout />
-                  Log out
-                </a>
-              )}
-            </DropdownMenuItem>
+                </DropdownMenuItem>
+              </>
+            )}
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>

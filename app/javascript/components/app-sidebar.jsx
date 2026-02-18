@@ -154,10 +154,10 @@ const defaultUser = {
   avatar: "/avatars/default.jpg",
 }
 
-export function AppSidebar({ currentUser, csrfToken, ...props }) {
+export function AppSidebar({ currentUser, csrfToken, logoutPath, logoutFormId, ...props }) {
   const user = currentUser
-    ? { ...defaultUser, ...currentUser, avatar: currentUser.avatarUrl || defaultUser.avatar, csrfToken }
-    : { ...defaultUser, csrfToken }
+    ? { ...defaultUser, ...currentUser, avatar: currentUser.avatarUrl || defaultUser.avatar }
+    : defaultUser
 
   return (
     <Sidebar collapsible="offcanvas" {...props}>
@@ -179,7 +179,7 @@ export function AppSidebar({ currentUser, csrfToken, ...props }) {
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={user} />
+        <NavUser user={user} logoutPath={logoutPath} logoutFormId={logoutFormId} />
       </SidebarFooter>
     </Sidebar>
   );

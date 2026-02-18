@@ -17,7 +17,7 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 
-export function SiteHeader({ currentUser, csrfToken }) {
+export function SiteHeader({ currentUser, logoutFormId }) {
   return (
     <header
       className="flex h-(--header-height) shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height)">
@@ -97,24 +97,21 @@ export function SiteHeader({ currentUser, csrfToken }) {
                     </DropdownMenuGroup>
                   </>
                 )}
-                <DropdownMenuSeparator />
-                <DropdownMenuItem asChild>
-                  <form
-                    method="post"
-                    action={currentUser.logoutPath}
-                    className="contents"
-                  >
-                    <input type="hidden" name="_method" value="delete" />
-                    <input type="hidden" name="authenticity_token" value={csrfToken} />
-                    <button
-                      type="submit"
-                      className="flex w-full cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden"
-                    >
-                      <LogOutIcon className="h-4 w-4" />
-                      Logout
-                    </button>
-                  </form>
-                </DropdownMenuItem>
+                {logoutFormId && (
+                  <>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem asChild>
+                      <button
+                        type="button"
+                        onClick={() => document.getElementById(logoutFormId)?.requestSubmit()}
+                        className="flex w-full cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden"
+                      >
+                        <LogOutIcon className="h-4 w-4" />
+                        Logout
+                      </button>
+                    </DropdownMenuItem>
+                  </>
+                )}
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
