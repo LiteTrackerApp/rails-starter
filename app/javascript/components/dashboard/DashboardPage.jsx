@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/sidebar"
 import { Toaster } from "@/components/ui/sonner"
 
-import dashboardData from "@/data/dashboard-data.json"
+import dashboardData from "@/data/dashboard-no-spaces-data.json"
 
 const LOGOUT_FORM_ID = "logout-form"
 
