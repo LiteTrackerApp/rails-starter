@@ -11,15 +11,6 @@ module ApplicationHelper
   SPACES_LIST_LIMIT     = 50
   DEFAULT_AVATAR_URL    = "/avatars/default.jpg"
 
-  # Breadcrumb title lookup: [controller] or [controller, action] => title
-  BREADCRUMB_TITLES = {
-    CONTROLLER_PATH_SPACES => { "show" => "Overview", "edit" => "Settings", "update" => "Settings" },
-    CONTROLLER_PATH_USERS  => { "show" => "Overview", "edit" => "Settings", "update" => "Settings", "new" => "New user", "create" => "New user" },
-    "spaces/users"         => "Users",
-    ROLES_CONTROLLER      => "Roles",
-    "spaces/subscriptions" => "Subscriptions",
-  }.freeze
-
   def render_flash_stream
     turbo_stream.update "flash", partial: "common/flash"
   end
@@ -72,9 +63,7 @@ module ApplicationHelper
   end
 
   def space_breadcrumb_title
-    ctrl, action = params[:controller], params[:action]
-    title = BREADCRUMB_TITLES.dig(ctrl, action) || (BREADCRUMB_TITLES[ctrl] if BREADCRUMB_TITLES[ctrl].is_a?(String))
-    title || ctrl.split("/").last.humanize
+    ::SpaceBreadcrumbTitle.call(params[:controller], params[:action])
   end
 
   def inline_svg(path, options = {})
