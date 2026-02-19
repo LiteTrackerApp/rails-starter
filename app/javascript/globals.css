@@ -30,17 +30,68 @@
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
+  /* Reusable border/outline: ring at 50% with transparent (shadcn-style borders) */
+  --border-ring-mix: color-mix(in oklab, var(--ring) 50%, transparent);
+  /* Slightly stronger variant if borders look too subtle: use 60% or 65% instead of 50% */
+  --border-ring-mix-strong: color-mix(in oklab, var(--ring) 65%, transparent);
+  --border: var(--border-ring-mix-strong);
+  --input: var(--border-ring-mix-strong);
+  /* Expose for use in arbitrary values */
+  --color-border-ring-mix: var(--border-ring-mix);
   --sidebar: hsl(0 0% 98%);
   --sidebar-foreground: hsl(240 5.3% 26.1%);
   --sidebar-primary: hsl(240 5.9% 10%);
   --sidebar-primary-foreground: hsl(0 0% 98%);
   --sidebar-accent: hsl(240 4.8% 95.9%);
   --sidebar-accent-foreground: hsl(240 5.9% 10%);
-  --sidebar-border: hsl(220 13% 91%);
+  --sidebar-border: var(--border-ring-mix-strong);
   --sidebar-ring: hsl(217.2 91.2% 59.8%);
+}
+
+/* Global outline uses same ring-mix for focus/outline consistency */
+* {
+  outline-color: var(--border-ring-mix);
+}
+
+/* Tailwind .border only sets border-width/style; set default border-color from our token */
+.border,
+.border-t,
+.border-b,
+.border-l,
+.border-r,
+.border-x,
+.border-y {
+  border-color: var(--border);
+}
+
+/* border-input (buttons, inputs, dropdown triggers) - ensure token color, not black */
+.border-input {
+  border-color: var(--input);
+}
+
+/* Buttons and button-like controls: no black border/shadow; use token so hover shows one consistent color */
+button.border,
+summary.border,
+[data-slot="button"].border,
+.border.border-input {
+  border-color: var(--input);
+}
+
+/* Button/control shadows (shadow-xs, shadow-sm) default to black; use border token so no black outline */
+.shadow-xs,
+.shadow-sm {
+  --tw-shadow-color: var(--border);
+}
+
+/* Separator (e.g. vertical line next to Toggle Sidebar) and any bg-border use our token */
+.bg-border {
+  background-color: var(--border);
+}
+
+/* Sidebar rail hover line (::after) and other sidebar borders */
+.bg-sidebar-border {
+  background-color: var(--sidebar-border);
 }
 
 @theme inline {
@@ -124,6 +175,6 @@
   --sidebar-primary-foreground: hsl(0 0% 100%);
   --sidebar-accent: hsl(240 3.7% 15.9%);
   --sidebar-accent-foreground: hsl(240 4.8% 95.9%);
-  --sidebar-border: hsl(240 3.7% 15.9%);
+  --sidebar-border: var(--border-ring-mix);
   --sidebar-ring: hsl(217.2 91.2% 59.8%);
 }

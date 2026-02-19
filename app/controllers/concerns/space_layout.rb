@@ -10,6 +10,7 @@ module SpaceLayout
   private
 
   def space_shadcn_layout
-    @space&.persisted? ? "space_shadcn" : "application"
+    return "space_shadcn" if controller_name == "spaces" && (action_name == "index" || @space&.persisted?)
+    "application"
   end
 end

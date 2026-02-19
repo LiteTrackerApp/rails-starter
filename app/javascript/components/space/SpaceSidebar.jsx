@@ -5,7 +5,6 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
-  SidebarRail,
 } from "@/components/ui/sidebar"
 
 import { NavUser } from "@/components/nav-user"
@@ -54,7 +53,6 @@ export function SpaceSidebar({
           logoutFormId={logoutFormId}
         />
       </SidebarFooter>
-      <SidebarRail />
     </Sidebar>
   )
 }

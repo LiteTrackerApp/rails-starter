@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_28_031745) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_18_130000) do
   create_table "app_settings", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.json "settings", default: {}, null: false
@@ -41,10 +41,12 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_28_031745) do
   end
 
   create_table "spaces", force: :cascade do |t|
+    t.string "active_plan_name"
     t.datetime "created_at", null: false
     t.string "name"
     t.integer "status", default: 0
     t.datetime "updated_at", null: false
+    t.integer "users_count", default: 0, null: false
   end
 
   create_table "subscriptions", force: :cascade do |t|

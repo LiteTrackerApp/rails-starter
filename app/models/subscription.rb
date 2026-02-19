@@ -14,4 +14,14 @@ class Subscription < ApplicationRecord
   belongs_to :plan
 
   scope :active, -> { where(end_date: nil).or(where("end_date > ?", Date.current)) }
+
+  after_save :refresh_space_active_plan_name
+  after_destroy :refresh_space_active_plan_name
+
+  private
+
+  def refresh_space_active_plan_name
+    new_name = space.subscriptions.active.includes(:plan).last&.plan&.name || Plan.free_plan&.name
+    space.update_column(:active_plan_name, new_name)
+  end
 end

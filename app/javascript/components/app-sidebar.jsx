@@ -23,7 +23,6 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
-  SidebarRail,
 } from "@/components/ui/sidebar"
 
 // This is sample data.
@@ -191,7 +190,6 @@ export function AppSidebar({
           logoutFormId={logoutFormId}
         />
       </SidebarFooter>
-      <SidebarRail />
     </Sidebar>
   )
 }
