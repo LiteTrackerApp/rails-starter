@@ -47,10 +47,13 @@ module ApplicationHelper
     if controller_name == "spaces" && action_name == "index"
       return space_shadcn_index_props(content_html)
     end
+    if controller_name == "spaces" && action_name == "new"
+      return space_shadcn_new_space_props(content_html)
+    end
     if controller_name == "users"
       return space_shadcn_user_props(content_html)
     end
-    return {} unless defined?(@space) && @space
+    return {} unless defined?(@space) && @space&.persisted?
 
     props = {
       spaceName: @space.name,
@@ -88,6 +91,33 @@ module ApplicationHelper
     end
 
     props
+  end
+
+  def space_shadcn_new_space_props(content_html)
+    {
+      spaceName: "New space",
+      spacesPath: spaces_path,
+      newSpacePath: new_space_path,
+      navPaths: { homePath: spaces_path },
+      breadcrumbTitle: "New",
+      contentHtml: content_html,
+      csrfToken: form_authenticity_token,
+    }.merge(user_signed_in? ? {
+      currentUser: {
+        name: current_user.name.presence || current_user.email,
+        email: current_user.email,
+        profilePath: edit_user_path(current_user),
+        changePasswordPath: edit_user_registration_path,
+        spacesPath: spaces_path,
+        newSpacePath: new_space_path,
+        setupPath: edit_setup_path,
+        adminPath: rails_admin_path,
+        logoutPath: destroy_user_session_path,
+        avatarUrl: "/avatars/default.jpg",
+        multiTenantMode: multi_tenant_mode?,
+        isAdmin: current_user.admin?,
+      },
+    } : { currentUser: nil })
   end
 
   def space_shadcn_index_props(content_html)
