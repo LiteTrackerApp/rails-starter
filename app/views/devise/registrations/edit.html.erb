@@ -1,39 +1,46 @@
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put, class: "card card-md" }, data: { turbo: false }) do |f| %>
-  <div class="card-body">
-    <%= render "devise/shared/error_messages", resource: resource %>
-    <h2 class="card-title text-center mb-4">Change password</h2>
-    <div class="mb-3">
-      <label class="form-label">Email address</label>
-      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <em>Currently waiting confirmation for: <%= resource.unconfirmed_email %></em>
-      <% end %>
-      <div class="input-group input-group-flat">
-        <%= f.email_field :email, class: "form-control", placeholder: "Enter email", disabled: true %>
+<% input_class = "border-input placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm" %>
+<% btn_class = "bg-primary text-primary-foreground hover:bg-primary/90 inline-flex h-9 w-full items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50" %>
+
+<div class="flex flex-col gap-6">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "flex flex-col gap-6" }, data: { turbo: false }) do |f| %>
+    <div class="text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm bg-card">
+      <div class="@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-2 px-6 text-center">
+        <div class="leading-none font-semibold text-xl">Edit account</div>
+        <div class="text-muted-foreground text-sm">Update your password</div>
+      </div>
+      <div class="px-6">
+        <div class="group/field-group flex w-full flex-col gap-7">
+          <%= render "devise/shared/error_messages_shadcn", resource: resource %>
+          <div class="group/field flex w-full flex-col gap-3">
+            <label for="user_email" class="text-sm font-medium leading-none">Email</label>
+            <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+              <span class="text-muted-foreground text-xs">Currently waiting confirmation for: <%= resource.unconfirmed_email %></span>
+            <% end %>
+            <%= f.email_field :email, class: input_class, placeholder: "m@example.com", disabled: true %>
+          </div>
+          <div class="group/field flex w-full flex-col gap-3">
+            <label for="user_current_password" class="text-sm font-medium leading-none">Current password</label>
+            <%= f.password_field :current_password, class: input_class, placeholder: "Current password", autofocus: true, autocomplete: "current-password" %>
+          </div>
+          <div class="group/field flex w-full flex-col gap-3">
+            <label for="user_password" class="text-sm font-medium leading-none">New password</label>
+            <% if @minimum_password_length %>
+              <span class="text-muted-foreground text-xs">(<%= @minimum_password_length %> characters minimum)</span>
+            <% end %>
+            <%= f.password_field :password, class: input_class, placeholder: "New password", autocomplete: "new-password" %>
+          </div>
+          <div class="group/field flex w-full flex-col gap-3">
+            <label for="user_password_confirmation" class="text-sm font-medium leading-none">Confirm new password</label>
+            <%= f.password_field :password_confirmation, class: input_class, placeholder: "Confirm new password", autocomplete: "new-password" %>
+          </div>
+          <div class="group/field flex w-full flex-col gap-3">
+            <%= f.submit "Update", class: btn_class %>
+            <p class="text-muted-foreground text-center text-sm">
+              <%= link_to "Back", :back, class: "underline underline-offset-4 hover:text-primary" %>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="mb-3">
-      <label class="form-label">Current password</label>
-      <div class="input-group input-group-flat">
-        <%= f.password_field :current_password, class: "form-control", placeholder: "Password", autofocus: true, autocomplete: "current-password" %>
-      </div>
-    </div>
-    <div class="mb-3">
-      <label class="form-label">New password</label>
-      <div class="input-group input-group-flat">
-        <%= f.password_field :password, class: "form-control", placeholder: "Password", autocomplete: "new-password" %>
-      </div>
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Confirm new password</label>
-      <div class="input-group input-group-flat">
-        <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Password", autocomplete: "new-password" %>
-      </div>
-    </div>
-    <div class="form-footer">
-      <%= f.submit "Update", class: "btn btn-primary w-100" %>
-    </div>
-    <div class="text-center text-muted mt-3">
-      <%= link_to "Back", :back, class: "btn btn-primary w-100" %>
-    </div>
-  </div>
-<% end %>
+  <% end %>
+</div>
