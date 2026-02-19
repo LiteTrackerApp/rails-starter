@@ -21,6 +21,7 @@ export function SpaceSidebar({
   spaceName,
   spacesPath,
   newSpacePath,
+  spaces,
   navPaths,
   currentUser,
   logoutPath,
@@ -41,6 +42,7 @@ export function SpaceSidebar({
           spaceName={spaceName}
           spacesPath={spacesPath}
           newSpacePath={newSpacePath}
+          spaces={spaces}
         />
       </SidebarHeader>
       <SidebarContent>

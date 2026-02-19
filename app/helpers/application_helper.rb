@@ -35,6 +35,14 @@ module ApplicationHelper
     @user_spaces ||= current_user.spaces.order(:name).filter(&:active?)
   end
 
+  def space_shadcn_spaces_list
+    return [] unless user_signed_in?
+
+    current_user.spaces.order(:name).limit(50).map do |s|
+      { id: s.id, name: s.name, path: space_path(s) }
+    end
+  end
+
   def abbrev_name(name)
     name.blank? ? "?" : name.split.map(&:first).join(".")
   end
@@ -50,7 +58,8 @@ module ApplicationHelper
     if controller_name == "spaces" && action_name == "new"
       return space_shadcn_new_space_props(content_html)
     end
-    if controller_name == "users"
+    # Profile (UsersController) only; space users (Spaces::UsersController) use full space nav below
+    if controller_name == "users" && controller_path == "users"
       return space_shadcn_user_props(content_html)
     end
     return {} unless defined?(@space) && @space&.persisted?
@@ -59,6 +68,7 @@ module ApplicationHelper
       spaceName: @space.name,
       spacesPath: spaces_path,
       newSpacePath: new_space_path,
+      spaces: space_shadcn_spaces_list,
       navPaths: {
         homePath: space_path(@space),
         usersPath: space_users_path(@space),
@@ -99,6 +109,7 @@ module ApplicationHelper
       spaceName: "New space",
       spacesPath: spaces_path,
       newSpacePath: new_space_path,
+      spaces: space_shadcn_spaces_list,
       navPaths: { homePath: spaces_path, setupPath: edit_setup_path },
       breadcrumbTitle: "New",
       contentHtml: content_html,
@@ -126,6 +137,7 @@ module ApplicationHelper
       spaceName: "Spaces",
       spacesPath: spaces_path,
       newSpacePath: new_space_path,
+      spaces: space_shadcn_spaces_list,
       navPaths: { homePath: spaces_path, setupPath: edit_setup_path },
       breadcrumbTitle: "Spaces",
       contentHtml: content_html,
@@ -153,6 +165,7 @@ module ApplicationHelper
       spaceName: "User",
       spacesPath: spaces_path,
       newSpacePath: new_space_path,
+      spaces: space_shadcn_spaces_list,
       navPaths: { homePath: (user_signed_in? ? edit_user_path(current_user) : root_path) },
       breadcrumbTitle: space_breadcrumb_title,
       contentHtml: content_html,

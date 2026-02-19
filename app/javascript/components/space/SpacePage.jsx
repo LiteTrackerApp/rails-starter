@@ -21,6 +21,7 @@ export default function SpacePage({
   spaceName,
   spacesPath,
   newSpacePath,
+  spaces,
   navPaths,
   currentUser,
   csrfToken,
@@ -47,6 +48,7 @@ export default function SpacePage({
           spaceName={spaceName}
           spacesPath={spacesPath}
           newSpacePath={newSpacePath}
+          spaces={spaces}
           navPaths={navPaths}
           currentUser={currentUser}
           logoutPath={logoutPath}

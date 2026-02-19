@@ -17,7 +17,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar"
 
-export function SpaceTeamSwitcher({ spaceName, spacesPath, newSpacePath }) {
+export function SpaceTeamSwitcher({ spaceName, spacesPath, newSpacePath, spaces = [] }) {
   const { isMobile } = useSidebar()
 
   if (!spaceName) return null
@@ -60,6 +60,17 @@ export function SpaceTeamSwitcher({ spaceName, spacesPath, newSpacePath }) {
                 </a>
               </DropdownMenuItem>
             )}
+            {spaces?.length > 0 &&
+              spaces.map((space) => (
+                <DropdownMenuItem key={space.id} asChild>
+                  <a href={space.path} className="gap-2 p-2">
+                    <div className="flex size-6 items-center justify-center rounded-md border bg-transparent">
+                      <Building2 className="size-3.5 shrink-0" />
+                    </div>
+                    {space.name}
+                  </a>
+                </DropdownMenuItem>
+              ))}
             {newSpacePath && (
               <>
                 <DropdownMenuSeparator />
