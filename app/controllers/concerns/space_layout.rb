@@ -11,6 +11,7 @@ module SpaceLayout
 
   def space_shadcn_layout
     return "space_shadcn" if controller_name == "spaces" && (action_name == "index" || @space&.persisted?)
+    return "space_shadcn" if controller_name == "users"
     "application"
   end
 end

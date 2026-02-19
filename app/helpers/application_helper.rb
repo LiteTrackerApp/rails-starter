@@ -44,9 +44,11 @@ module ApplicationHelper
   end
 
   def space_shadcn_props(content_html = "")
-    # Spaces index: no @space but we render the list inside space_shadcn layout
     if controller_name == "spaces" && action_name == "index"
       return space_shadcn_index_props(content_html)
+    end
+    if controller_name == "users"
+      return space_shadcn_user_props(content_html)
     end
     return {} unless defined?(@space) && @space
 
@@ -115,12 +117,46 @@ module ApplicationHelper
     } : { currentUser: nil })
   end
 
+  def space_shadcn_user_props(content_html)
+    {
+      spaceName: "User",
+      spacesPath: spaces_path,
+      newSpacePath: new_space_path,
+      navPaths: { homePath: (user_signed_in? ? edit_user_path(current_user) : root_path) },
+      breadcrumbTitle: space_breadcrumb_title,
+      contentHtml: content_html,
+      csrfToken: form_authenticity_token,
+    }.merge(user_signed_in? ? {
+      currentUser: {
+        name: current_user.name.presence || current_user.email,
+        email: current_user.email,
+        profilePath: edit_user_path(current_user),
+        changePasswordPath: edit_user_registration_path,
+        spacesPath: spaces_path,
+        newSpacePath: new_space_path,
+        setupPath: edit_setup_path,
+        adminPath: rails_admin_path,
+        logoutPath: destroy_user_session_path,
+        avatarUrl: "/avatars/default.jpg",
+        multiTenantMode: multi_tenant_mode?,
+        isAdmin: current_user.admin?,
+      },
+    } : { currentUser: nil })
+  end
+
   def space_breadcrumb_title
     case params[:controller]
     when "spaces"
       case params[:action]
       when "show" then "Overview"
       when "edit", "update" then "Settings"
+      else params[:action].humanize
+      end
+    when "users"
+      case params[:action]
+      when "show" then "Overview"
+      when "edit", "update" then "Settings"
+      when "new", "create" then "New user"
       else params[:action].humanize
       end
     when "spaces/users" then "Users"
