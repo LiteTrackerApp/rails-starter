@@ -3,6 +3,7 @@ import {
   Bell,
   ChevronsUpDown,
   CreditCard,
+  LayoutDashboard,
   LayoutGrid,
   LogOut,
   Sparkles,
@@ -100,6 +101,14 @@ export function NavUser({ user, logoutPath, logoutFormId }) {
                       <a href={user.hasSpaces ? user.spacesPath : user.newSpacePath}>
                         <LayoutGrid />
                         {user.hasSpaces ? "Spaces" : "+ Add space"}
+                      </a>
+                    </DropdownMenuItem>
+                  )}
+                  {user?.dashboardPath && (
+                    <DropdownMenuItem asChild>
+                      <a href={user.dashboardPath}>
+                        <LayoutDashboard />
+                        Dashboard
                       </a>
                     </DropdownMenuItem>
                   )}

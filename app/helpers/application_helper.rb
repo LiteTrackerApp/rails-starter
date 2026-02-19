@@ -130,6 +130,7 @@ module ApplicationHelper
       changePasswordPath: edit_user_registration_path,
       spacesPath: spaces_path,
       newSpacePath: new_space_path,
+      dashboardPath: shadcn_demo_path,
       hasSpaces: current_user.spaces.exists?,
       setupPath: edit_setup_path,
       adminPath: rails_admin_path,
