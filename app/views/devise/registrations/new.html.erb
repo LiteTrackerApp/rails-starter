@@ -7,14 +7,13 @@
       </div>
       <div class="px-6">
         <div class="group/field-group flex w-full flex-col gap-7">
-          <div class="group/field flex w-full flex-col gap-3">
-            <% oauth_btn = "border-input bg-background hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 inline-flex h-9 w-full items-center justify-center gap-2 rounded-md border px-4 py-2 text-sm font-medium shadow-xs transition-all outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50" %>
+          <div class="form-field group/field">
             <div class="flex flex-col gap-2 sm:gap-2">
-              <a href="javascript:void(0)" class="<%= oauth_btn %>" aria-disabled="true" tabindex="-1">
+              <a href="javascript:void(0)" class="btn-oauth" aria-disabled="true" tabindex="-1">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z" /></svg>
                 Sign up with Google
               </a>
-              <a href="javascript:void(0)" class="<%= oauth_btn %>" aria-disabled="true" tabindex="-1">
+              <a href="javascript:void(0)" class="btn-oauth" aria-disabled="true" tabindex="-1">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701" /></svg>
                 Sign up with Apple
               </a>
@@ -25,26 +24,26 @@
             <span class="bg-card text-muted-foreground relative mx-auto block w-fit px-2">Or continue with</span>
           </div>
           <%= render "devise/shared/error_messages_shadcn", resource: resource %>
-          <div class="group/field flex w-full flex-col gap-3">
-            <label for="user_email" class="text-sm font-medium leading-none">Email</label>
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "border-input placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm", placeholder: "m@example.com" %>
+          <div class="form-field group/field">
+            <label for="user_email" class="form-label">Email</label>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input-shadcn", placeholder: "m@example.com" %>
           </div>
-          <div class="group/field flex w-full flex-col gap-3">
-            <label for="user_password" class="text-sm font-medium leading-none">Password</label>
+          <div class="form-field group/field">
+            <label for="user_password" class="form-label">Password</label>
             <% if @minimum_password_length %>
               <span class="text-muted-foreground text-xs">(<%= @minimum_password_length %> characters minimum)</span>
             <% end %>
-            <%= f.password_field :password, class: "border-input placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm", placeholder: "Password", autocomplete: "new-password" %>
+            <%= f.password_field :password, class: "input-shadcn", placeholder: "Password", autocomplete: "new-password" %>
           </div>
-          <div class="group/field flex w-full flex-col gap-3">
-            <label for="user_password_confirmation" class="text-sm font-medium leading-none">Confirm password</label>
-            <%= f.password_field :password_confirmation, class: "border-input placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm", placeholder: "Confirm password", autocomplete: "new-password" %>
+          <div class="form-field group/field">
+            <label for="user_password_confirmation" class="form-label">Confirm password</label>
+            <%= f.password_field :password_confirmation, class: "input-shadcn", placeholder: "Confirm password", autocomplete: "new-password" %>
           </div>
-          <div class="group/field flex w-full flex-col gap-3">
-            <%= f.submit "Sign up", class: "bg-primary text-primary-foreground hover:bg-primary/90 inline-flex h-9 w-full items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50" %>
+          <div class="form-field group/field">
+            <%= f.submit "Sign up", class: "btn-primary" %>
             <p class="text-muted-foreground text-center text-sm">
               Already have an account?
-              <%= link_to "Sign in", new_session_path(resource_name), class: "underline underline-offset-4 hover:text-primary" %>
+              <%= link_to "Sign in", new_session_path(resource_name), class: "link-muted" %>
             </p>
           </div>
         </div>
@@ -52,9 +51,9 @@
     </div>
     <p class="text-muted-foreground px-6 text-center text-sm">
       By clicking continue, you agree to our
-      <%= link_to "Terms of Service", "#", class: "underline underline-offset-4 hover:text-primary" %>
+      <%= link_to "Terms of Service", "#", class: "link-muted" %>
       and
-      <%= link_to "Privacy Policy", "#", class: "underline underline-offset-4 hover:text-primary" %>.
+      <%= link_to "Privacy Policy", "#", class: "link-muted" %>.
     </p>
   <% end %>
 </div>

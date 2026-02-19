@@ -82,6 +82,31 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+/* Reusable form components (devise, etc.) */
+.btn-primary {
+  @apply bg-primary text-primary-foreground hover:bg-primary/90 inline-flex h-9 w-full items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50;
+}
+
+.input-shadcn {
+  @apply flex h-9 w-full min-w-0 rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm placeholder:text-muted-foreground focus-visible:border-ring;
+}
+
+.btn-oauth {
+  @apply inline-flex h-9 w-full items-center justify-center gap-2 rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-xs transition-all outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 hover:bg-accent hover:text-accent-foreground dark:border-input dark:hover:bg-input/50 dark:bg-input/30;
+}
+
+.form-field {
+  @apply flex w-full flex-col gap-3;
+}
+
+.form-label {
+  @apply text-sm font-medium leading-none;
+}
+
+.link-muted {
+  @apply text-muted-foreground underline underline-offset-4 hover:text-primary;
+}
+
 /* Buttons and links use pointer cursor */
 #shadcn-root button,
 #shadcn-root a[href],
