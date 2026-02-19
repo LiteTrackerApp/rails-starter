@@ -95,11 +95,11 @@ export function NavUser({ user, logoutPath, logoutFormId }) {
                       </a>
                     </DropdownMenuItem>
                   )}
-                  {user?.multiTenantMode && user?.spacesPath && (
+                  {user?.multiTenantMode && (user?.spacesPath || user?.newSpacePath) && (
                     <DropdownMenuItem asChild>
-                      <a href={user.spacesPath}>
+                      <a href={user.hasSpaces ? user.spacesPath : user.newSpacePath}>
                         <LayoutGrid />
-                        Spaces
+                        {user.hasSpaces ? "Spaces" : "+ Add space"}
                       </a>
                     </DropdownMenuItem>
                   )}

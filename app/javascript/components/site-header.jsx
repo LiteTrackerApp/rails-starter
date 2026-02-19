@@ -73,9 +73,9 @@ export function SiteHeader({ currentUser, logoutFormId }) {
                   </DropdownMenuItem>
                   {currentUser.multiTenantMode && (
                     <DropdownMenuItem asChild>
-                      <a href={currentUser.spacesPath}>
+                      <a href={currentUser.hasSpaces ? currentUser.spacesPath : currentUser.newSpacePath}>
                         <LayoutGridIcon className="mr-2 h-4 w-4" />
-                        Spaces
+                        {currentUser.hasSpaces ? "Spaces" : "+ Add space"}
                       </a>
                     </DropdownMenuItem>
                   )}

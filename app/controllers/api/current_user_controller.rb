@@ -21,6 +21,7 @@ module Api
         changePasswordPath: edit_user_registration_path,
         spacesPath: spaces_path,
         newSpacePath: new_space_path,
+        hasSpaces: current_user.spaces.exists?,
         setupPath: edit_setup_path,
         adminPath: rails_admin_path,
         logoutPath: destroy_user_session_path,
