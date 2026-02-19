@@ -1,135 +1,65 @@
-<div class="col-sm-6 col-lg-3">
-  <div class="card card-md">
-    <div class="card-body text-center">
-      <div class="text-uppercase text-secondary font-weight-medium">Free</div>
-      <div class="display-5 fw-bold my-3">$0</div>
-      <ul class="list-unstyled lh-lg">
-        <li><strong>3</strong> Users</li>
-        <li>
-          <!-- Download SVG icon from http://tabler-icons.io/i/check -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon me-1 text-success" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg>
-          Sharing Tools
-        </li>
-        <li>
-          <!-- Download SVG icon from http://tabler-icons.io/i/x -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon me-1 text-danger" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
-          Design Tools
-        </li>
-        <li>
-          <!-- Download SVG icon from http://tabler-icons.io/i/x -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon me-1 text-danger" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
-          Private Messages
-        </li>
-        <li>
-          <!-- Download SVG icon from http://tabler-icons.io/i/x -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon me-1 text-danger" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
-          Twitter API
-        </li>
+<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+  <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
+    <div class="p-6 text-center">
+      <p class="text-xs font-medium uppercase tracking-wide text-muted-foreground">Free</p>
+      <p class="my-3 text-3xl font-bold">$0</p>
+      <ul class="space-y-2 text-left text-sm">
+        <li class="flex items-center gap-2"><strong>3</strong> Users</li>
+        <li class="flex items-center gap-2 text-green-600"><svg xmlns="http://www.w3.org/2000/svg" class="size-4 shrink-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg> Sharing Tools</li>
+        <li class="flex items-center gap-2 text-destructive"><svg xmlns="http://www.w3.org/2000/svg" class="size-4 shrink-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg> Design Tools</li>
+        <li class="flex items-center gap-2 text-destructive"><svg xmlns="http://www.w3.org/2000/svg" class="size-4 shrink-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg> Private Messages</li>
+        <li class="flex items-center gap-2 text-destructive"><svg xmlns="http://www.w3.org/2000/svg" class="size-4 shrink-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg> Twitter API</li>
       </ul>
-      <div class="text-center mt-4">
-        <%= link_to 'Choose plan', new_space_subscription_path({ plan_id: 1 }),  class: 'btn w-100' %>
+      <div class="mt-4">
+        <%= link_to 'Choose plan', new_space_subscription_path(@space, plan_id: 1), class: 'inline-flex w-full items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90' %>
       </div>
     </div>
   </div>
-</div>
-<div class="col-sm-6 col-lg-3">
-  <div class="card card-md">
-    <div class="card-body text-center">
-      <div class="text-uppercase text-secondary font-weight-medium">Premium</div>
-      <div class="display-5 fw-bold my-3">$49</div>
-      <ul class="list-unstyled lh-lg">
-        <li><strong>10</strong> Users</li>
-        <li>
-          <!-- Download SVG icon from http://tabler-icons.io/i/check -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon me-1 text-success" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg>
-          Sharing Tools
-        </li>
-        <li>
-          <!-- Download SVG icon from http://tabler-icons.io/i/check -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon me-1 text-success" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg>
-          Design Tools
-        </li>
-        <li>
-          <!-- Download SVG icon from http://tabler-icons.io/i/x -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon me-1 text-danger" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
-          Private Messages
-        </li>
-        <li>
-          <!-- Download SVG icon from http://tabler-icons.io/i/x -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon me-1 text-danger" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
-          Twitter API
-        </li>
+  <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
+    <div class="p-6 text-center">
+      <p class="text-xs font-medium uppercase tracking-wide text-muted-foreground">Premium</p>
+      <p class="my-3 text-3xl font-bold">$49</p>
+      <ul class="space-y-2 text-left text-sm">
+        <li class="flex items-center gap-2"><strong>10</strong> Users</li>
+        <li class="flex items-center gap-2 text-green-600"><svg xmlns="http://www.w3.org/2000/svg" class="size-4 shrink-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg> Sharing Tools</li>
+        <li class="flex items-center gap-2 text-green-600"><svg xmlns="http://www.w3.org/2000/svg" class="size-4 shrink-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg> Design Tools</li>
+        <li class="flex items-center gap-2 text-destructive"><svg xmlns="http://www.w3.org/2000/svg" class="size-4 shrink-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg> Private Messages</li>
+        <li class="flex items-center gap-2 text-destructive"><svg xmlns="http://www.w3.org/2000/svg" class="size-4 shrink-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg> Twitter API</li>
       </ul>
-      <div class="text-center mt-4">
-        <%= link_to 'Choose plan', new_space_subscription_path({ plan_id: 2 }),  class: 'btn w-100' %>
+      <div class="mt-4">
+        <%= link_to 'Choose plan', new_space_subscription_path(@space, plan_id: 2), class: 'inline-flex w-full items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90' %>
       </div>
     </div>
   </div>
-</div>
-<div class="col-sm-6 col-lg-3">
-  <div class="card card-md">
-    <div class="card-body text-center">
-      <div class="text-uppercase text-secondary font-weight-medium">Enterprise</div>
-      <div class="display-5 fw-bold my-3">$99</div>
-      <ul class="list-unstyled lh-lg">
-        <li><strong>100</strong> Users</li>
-        <li>
-          <!-- Download SVG icon from http://tabler-icons.io/i/check -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon me-1 text-success" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg>
-          Sharing Tools
-        </li>
-        <li>
-          <!-- Download SVG icon from http://tabler-icons.io/i/check -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon me-1 text-success" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg>
-          Design Tools
-        </li>
-        <li>
-          <!-- Download SVG icon from http://tabler-icons.io/i/check -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon me-1 text-success" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg>
-          Private Messages
-        </li>
-        <li>
-          <!-- Download SVG icon from http://tabler-icons.io/i/x -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon me-1 text-danger" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
-          Twitter API
-        </li>
+  <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
+    <div class="p-6 text-center">
+      <p class="text-xs font-medium uppercase tracking-wide text-muted-foreground">Enterprise</p>
+      <p class="my-3 text-3xl font-bold">$99</p>
+      <ul class="space-y-2 text-left text-sm">
+        <li class="flex items-center gap-2"><strong>100</strong> Users</li>
+        <li class="flex items-center gap-2 text-green-600"><svg xmlns="http://www.w3.org/2000/svg" class="size-4 shrink-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg> Sharing Tools</li>
+        <li class="flex items-center gap-2 text-green-600"><svg xmlns="http://www.w3.org/2000/svg" class="size-4 shrink-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg> Design Tools</li>
+        <li class="flex items-center gap-2 text-green-600"><svg xmlns="http://www.w3.org/2000/svg" class="size-4 shrink-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg> Private Messages</li>
+        <li class="flex items-center gap-2 text-destructive"><svg xmlns="http://www.w3.org/2000/svg" class="size-4 shrink-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg> Twitter API</li>
       </ul>
-      <div class="text-center mt-4">
-        <%= link_to 'Choose plan', new_space_subscription_path({ plan_id: 3 }),  class: 'btn w-100' %>
+      <div class="mt-4">
+        <%= link_to 'Choose plan', new_space_subscription_path(@space, plan_id: 3), class: 'inline-flex w-full items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90' %>
       </div>
     </div>
   </div>
-</div>
-<div class="col-sm-6 col-lg-3">
-  <div class="card card-md">
-    <div class="card-body text-center">
-      <div class="text-uppercase text-secondary font-weight-medium">Unlimited</div>
-      <div class="display-5 fw-bold my-3">$139</div>
-      <ul class="list-unstyled lh-lg">
-        <li><strong>Unlimited</strong> Users</li>
-        <li>
-          <!-- Download SVG icon from http://tabler-icons.io/i/check -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon me-1 text-success" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg>
-          Sharing Tools
-        </li>
-        <li>
-          <!-- Download SVG icon from http://tabler-icons.io/i/check -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon me-1 text-success" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg>
-          Design Tools
-        </li>
-        <li>
-          <!-- Download SVG icon from http://tabler-icons.io/i/check -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon me-1 text-success" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg>
-          Private Messages
-        </li>
-        <li>
-          <!-- Download SVG icon from http://tabler-icons.io/i/check -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon me-1 text-success" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg>
-          Twitter API
-        </li>
+  <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
+    <div class="p-6 text-center">
+      <p class="text-xs font-medium uppercase tracking-wide text-muted-foreground">Unlimited</p>
+      <p class="my-3 text-3xl font-bold">$139</p>
+      <ul class="space-y-2 text-left text-sm">
+        <li class="flex items-center gap-2"><strong>Unlimited</strong> Users</li>
+        <li class="flex items-center gap-2 text-green-600"><svg xmlns="http://www.w3.org/2000/svg" class="size-4 shrink-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg> Sharing Tools</li>
+        <li class="flex items-center gap-2 text-green-600"><svg xmlns="http://www.w3.org/2000/svg" class="size-4 shrink-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg> Design Tools</li>
+        <li class="flex items-center gap-2 text-green-600"><svg xmlns="http://www.w3.org/2000/svg" class="size-4 shrink-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg> Private Messages</li>
+        <li class="flex items-center gap-2 text-green-600"><svg xmlns="http://www.w3.org/2000/svg" class="size-4 shrink-0" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg> Twitter API</li>
       </ul>
-      <div class="text-center mt-4">
-        <%= link_to 'Choose plan', new_space_subscription_path({ plan_id: 4 }),  class: 'btn w-100' %>
+      <div class="mt-4">
+        <%= link_to 'Choose plan', new_space_subscription_path(@space, plan_id: 4), class: 'inline-flex w-full items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90' %>
       </div>
     </div>
   </div>

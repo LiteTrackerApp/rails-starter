@@ -5,6 +5,7 @@ import {
   Receipt,
   Settings,
   Users,
+  FlaskConical,
 } from "lucide-react"
 
 import {
@@ -20,6 +21,7 @@ const SPACE_NAV_ITEMS = [
   { name: "Users", pathKey: "usersPath", icon: Users },
   { name: "Settings", pathKey: "settingsPath", icon: Settings },
   { name: "Subscriptions", pathKey: "subscriptionsPath", icon: Receipt },
+  { name: "Demo setup", pathKey: "setupPath", icon: FlaskConical },
 ]
 
 export function SpaceNavProjects({ navPaths }) {

@@ -4,32 +4,30 @@
 <% content_for :page_title do %>
   <%= @space.name %>
 <% end %>
-<div class="row row-cards">
+<div class="flex flex-col gap-6">
   <% if @active_subscription.present? %>
-    <div class="col-12">
-      <div class="card card-md">
-        <div class="ribbon bg-green">
-          Active
-        </div>
-        <div class="card-status-bottom bg-success"></div>
-        <div class="card-body">
-          <div class="row align-items-center">
-            <div class="col-3">
-              <p class="m-0 text-secondary">Plan name</p>
-              <h2 class="h3"><%= @active_subscription.plan&.name %></h2>
-            </div>
-            <div class="col-3">
-              <p class="m-0 text-secondary">Start date</p>
-              <h2 class="h3"><%= @active_subscription.start_date || '-' %></h2>
-            </div>
-            <div class="col-3">
-              <p class="m-0 text-secondary">End date</p>
-              <h2 class="h3"><%= @active_subscription.end_date || '-' %></h2>
-            </div>
-            <div class="col-3">
-              <p class="m-0 text-secondary">seats</p>
-              <h2 class="h3"><%= @active_subscription.seats || '-' %></h2>
-            </div>
+    <div class="relative rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden">
+      <div class="absolute top-3 right-3">
+        <span class="inline-flex items-center rounded-md bg-green-500/90 px-2 py-0.5 text-xs font-medium text-white">Active</span>
+      </div>
+      <div class="h-1 w-full bg-green-500" aria-hidden="true"></div>
+      <div class="p-6">
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div>
+            <p class="text-sm text-muted-foreground">Plan name</p>
+            <p class="mt-1 text-lg font-semibold"><%= @active_subscription.plan&.name %></p>
+          </div>
+          <div>
+            <p class="text-sm text-muted-foreground">Start date</p>
+            <p class="mt-1 text-lg font-semibold"><%= @active_subscription.start_date || '-' %></p>
+          </div>
+          <div>
+            <p class="text-sm text-muted-foreground">End date</p>
+            <p class="mt-1 text-lg font-semibold"><%= @active_subscription.end_date || '-' %></p>
+          </div>
+          <div>
+            <p class="text-sm text-muted-foreground">Seats</p>
+            <p class="mt-1 text-lg font-semibold"><%= @active_subscription.seats || '-' %></p>
           </div>
         </div>
       </div>

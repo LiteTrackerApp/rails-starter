@@ -5,7 +5,7 @@
   <%= @space.name %>
 <% end %>
 
-<div class="row row-cards">
+<div class="flex flex-col gap-6">
   <% if @plan.present? %>
     <%= render 'payment' %>
   <% else %>
