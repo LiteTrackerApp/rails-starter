@@ -36,7 +36,7 @@ export function SpaceSidebar({
     : defaultUser
 
   return (
-    <Sidebar collapsible="icon" side="left">
+    <Sidebar collapsible="icon" side="left" variant="inset">
       <SidebarHeader>
         <SpaceTeamSwitcher
           spaceName={spaceName}

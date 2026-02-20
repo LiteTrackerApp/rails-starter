@@ -43,7 +43,12 @@ export default function SpacePage({
           <input type="hidden" name="authenticity_token" value={csrfToken} />
         </form>
       )}
-      <SidebarProvider>
+      <SidebarProvider
+        style={{
+          "--sidebar-width": "calc(var(--spacing) * 72)",
+          "--header-height": "calc(var(--spacing) * 12)",
+        }}
+      >
         <SpaceSidebar
           spaceName={spaceName}
           spacesPath={spacesPath}
@@ -55,7 +60,7 @@ export default function SpacePage({
           logoutFormId={LOGOUT_FORM_ID}
         />
         <SidebarInset>
-          <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
+          <header className="flex h-(--header-height) shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
             <div className="flex w-full items-center gap-2 px-4">
               <SidebarTrigger className="-ml-1" />
               <Separator
@@ -77,11 +82,13 @@ export default function SpacePage({
               </Breadcrumb>
             </div>
           </header>
-          <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-            <div
-              className="space-content flex min-h-0 flex-1 flex-col rounded-xl"
-              dangerouslySetInnerHTML={contentHtml ? { __html: contentHtml } : undefined}
-            />
+          <div className="flex flex-1 flex-col">
+            <div className="@container/main flex flex-1 flex-col gap-2">
+              <div
+                className="flex flex-col gap-4 py-4 md:gap-6 md:py-6 px-4 lg:px-6 min-h-0 flex-1"
+                dangerouslySetInnerHTML={contentHtml ? { __html: contentHtml } : undefined}
+              />
+            </div>
           </div>
         </SidebarInset>
       </SidebarProvider>
