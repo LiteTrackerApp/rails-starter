@@ -1,67 +1,61 @@
-<% content_for :page_pretitle do %>
-Spaces
-<% end %>
-<% content_for :page_title do %>
-<% 'Index' %>
-<% end %>
+<turbo-frame id="space_index" class="flex min-h-0 flex-1 flex-col">
+  <div class="flex min-h-0 flex-1 flex-col gap-4">
+    <div class="flex flex-col gap-1 shrink-0">
+      <h1 class="text-2xl font-semibold tracking-tight">Welcome back!</h1>
+      <p class="text-muted-foreground">Here's a list of your spaces.</p>
+    </div>
 
-<turbo-frame id="space_index">
-  <div class="row row-cards">
-    <div class="col-12">
-      <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">Spaces</h3>
-          <div class="card-actions">
-            <%= link_to new_space_path, data: { turbo_frame: '_top' }, class: "btn btn-primary" do %>
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
-                stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <line x1="12" y1="5" x2="12" y2="19" />
-              <line x1="5" y1="12" x2="19" y2="12" />
-            </svg>
-            New space
-            <% end %>
-          </div>
-        </div>
-        <div class="table-responsive">
-          
-          <table class="table table-vcenter table-mobile-md card-table">
-            <thead>
-              
-                <th>Name</th>
-              
-                <th>Status</th>
-              
-              <th class="w-1"></th>
-            </thead>
-            <tbody>
-              <% @spaces.each do |space| %>
-              <tr id='<%= dom_id(space)%>'>
-                
-                  <td class="text-muted" data-label="Name">
-                    <%= space.name %>
-                  </td>
-                
-                  <td class="text-muted" data-label="Status">
-                    <%= space.status %>
-                  </td>
-                
-                <td>
-                  <div class="btn-list flex-nowrap">
-                    <%= button_to "Destroy", space, method: :delete, form: {data: {turbo_confirm: 'Are you sure?'}}, class: "btn btn-danger" %>
-                    <%= link_to "Show", space_path(space), data: { turbo_frame: '_top' }, class: "btn btn-primary" %>
-                    <%= link_to "Edit", edit_space_path(space), data: { turbo_frame: '_top' }, class: "btn" %>
-                  </div>
+    <div class="flex items-center justify-between gap-4 shrink-0">
+      <div class="flex-1"></div>
+      <%= link_to new_space_path, data: { turbo_frame: "_top" }, class: "inline-flex items-center justify-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50" do %>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+        Add space
+      <% end %>
+    </div>
+
+    <div class="flex min-h-0 flex-1 flex-col rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden">
+      <div class="relative min-h-0 flex-1 overflow-auto">
+        <table class="w-full caption-bottom text-sm">
+          <thead>
+            <tr class="border-b bg-muted/50 transition-colors hover:bg-muted/50">
+              <th class="h-10 px-4 text-left align-middle font-medium text-muted-foreground">Name</th>
+              <th class="h-10 px-4 text-left align-middle font-medium text-muted-foreground">Status</th>
+              <th class="h-10 px-4 text-left align-middle font-medium text-muted-foreground">Users</th>
+              <th class="h-10 px-4 text-left align-middle font-medium text-muted-foreground">Plan</th>
+              <th class="h-10 w-10 px-2 text-right align-middle font-medium text-muted-foreground"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @spaces.each do |space| %>
+              <tr id="<%= dom_id(space) %>" class="border-b transition-colors hover:bg-muted/50">
+                <td class="p-4 align-middle font-medium">
+                  <%= link_to space.name, space_path(space), data: { turbo_frame: "_top" }, class: "text-primary underline-offset-4 hover:underline" %>
+                </td>
+                <td class="p-4 align-middle text-muted-foreground"><%= space.status %></td>
+                <td class="p-4 align-middle text-muted-foreground"><%= space.users_count %></td>
+                <td class="p-4 align-middle text-muted-foreground"><%= space.active_plan_name.presence || "—" %></td>
+                <td class="p-2 text-right align-middle">
+                  <details class="relative inline-block group/details">
+                    <summary class="inline-flex size-9 cursor-pointer items-center justify-center rounded-md border border-input bg-background text-muted-foreground shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring [&::-webkit-details-marker]:hidden">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+                      <span class="sr-only">Open menu</span>
+                    </summary>
+                    <div class="absolute right-0 top-full z-50 mt-1 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md">
+                      <%= link_to "Show", space_path(space), data: { turbo_frame: "_top" }, class: "relative flex w-full cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground" %>
+                      <%= link_to "Edit", edit_space_path(space), data: { turbo_frame: "_top" }, class: "relative flex w-full cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground" %>
+                      <div class="my-1 h-px bg-border" role="separator"></div>
+                      <%= button_to "Destroy", space, method: :delete, form: { data: { turbo_confirm: "Are you sure?" }, class: "w-full" }, class: "relative flex w-full cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-destructive hover:text-destructive-foreground text-destructive text-left" %>
+                    </div>
+                  </details>
                 </td>
               </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-        <div class="card-footer d-flex align-items-center">
-          <p class="m-0 text-muted"><%= page_entries_info @spaces %></p>
-          <%= paginate @spaces %>
-        </div>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="flex flex-wrap items-center justify-between gap-4 border-t bg-muted/30 px-4 py-3 shrink-0">
+        <p class="text-muted-foreground text-sm"><%= page_entries_info @spaces %></p>
+        <div class="flex items-center gap-2"><%= paginate @spaces %></div>
       </div>
     </div>
   </div>

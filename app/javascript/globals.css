@@ -1,0 +1,180 @@
+@import "tailwindcss";
+
+/* Scan Rails views for Tailwind classes (e.g. space content) */
+@source "../views/**/*.erb";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Shadcn design tokens */
+:root {
+  --radius: 0.625rem;
+  --spacing: 0.25rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --ring: oklch(0.708 0 0);
+  /* Reusable border/outline: ring at 50% with transparent (shadcn-style borders) */
+  --border-ring-mix: color-mix(in oklab, var(--ring) 50%, transparent);
+  /* Slightly stronger variant if borders look too subtle: use 60% or 65% instead of 50% */
+  --border-ring-mix-strong: color-mix(in oklab, var(--ring) 65%, transparent);
+  --border: var(--border-ring-mix-strong);
+  --input: var(--border-ring-mix-strong);
+  /* Expose for use in arbitrary values */
+  --color-border-ring-mix: var(--border-ring-mix);
+  --sidebar: hsl(0 0% 98%);
+  --sidebar-foreground: hsl(240 5.3% 26.1%);
+  --sidebar-primary: hsl(240 5.9% 10%);
+  --sidebar-primary-foreground: hsl(0 0% 98%);
+  --sidebar-accent: hsl(240 4.8% 95.9%);
+  --sidebar-accent-foreground: hsl(240 5.9% 10%);
+  --sidebar-border: var(--border-ring-mix-strong);
+  --sidebar-ring: hsl(217.2 91.2% 59.8%);
+}
+
+/* Global outline uses same ring-mix for focus/outline consistency */
+* {
+  outline-color: var(--border-ring-mix);
+}
+
+/* Tailwind .border only sets border-width/style; set default border-color from our token */
+.border,
+.border-t,
+.border-b,
+.border-l,
+.border-r,
+.border-x,
+.border-y {
+  border-color: var(--border);
+}
+
+/* border-input (buttons, inputs, dropdown triggers) - ensure token color, not black */
+.border-input {
+  border-color: var(--input);
+}
+
+/* Buttons and button-like controls: no black border/shadow; use token so hover shows one consistent color */
+button.border,
+summary.border,
+[data-slot="button"].border,
+.border.border-input {
+  border-color: var(--input);
+}
+
+/* Button/control shadows (shadow-xs, shadow-sm) default to black; use border token so no black outline */
+.shadow-xs,
+.shadow-sm {
+  --tw-shadow-color: var(--border);
+}
+
+/* Separator (e.g. vertical line next to Toggle Sidebar) and any bg-border use our token */
+.bg-border {
+  background-color: var(--border);
+}
+
+/* Sidebar rail hover line (::after) and other sidebar borders */
+.bg-sidebar-border {
+  background-color: var(--sidebar-border);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* Reusable form components (devise, etc.) */
+.btn-primary {
+  @apply bg-primary text-primary-foreground hover:bg-primary/90 inline-flex h-9 w-full items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-colors disabled:pointer-events-none disabled:opacity-50;
+}
+
+.input-shadcn {
+  @apply flex h-9 w-full min-w-0 rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm placeholder:text-muted-foreground focus-visible:border-ring;
+}
+
+.btn-oauth {
+  @apply inline-flex h-9 w-full items-center justify-center gap-2 rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-xs transition-all outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 hover:bg-accent hover:text-accent-foreground dark:border-input dark:hover:bg-input/50 dark:bg-input/30;
+}
+
+.form-field {
+  @apply flex w-full flex-col gap-3;
+}
+
+.form-label {
+  @apply text-sm font-medium leading-none;
+}
+
+.link-muted {
+  @apply text-muted-foreground underline underline-offset-4 hover:text-primary;
+}
+
+/* Buttons and links use pointer cursor */
+#shadcn-root button,
+#shadcn-root a[href],
+#space-root button,
+#space-root a[href] {
+  cursor: pointer;
+}
+
+.dark {
+  --popover: oklch(0.269 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --sidebar: hsl(240 5.9% 10%);
+  --sidebar-foreground: hsl(240 4.8% 95.9%);
+  --sidebar-primary: hsl(224.3 76.3% 48%);
+  --sidebar-primary-foreground: hsl(0 0% 100%);
+  --sidebar-accent: hsl(240 3.7% 15.9%);
+  --sidebar-accent-foreground: hsl(240 4.8% 95.9%);
+  --sidebar-border: var(--border-ring-mix);
+  --sidebar-ring: hsl(217.2 91.2% 59.8%);
+}

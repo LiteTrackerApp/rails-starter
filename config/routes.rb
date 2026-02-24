@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { sessions: "users/sessions", registrations: "users/registrations", passwords: "users/passwords" }
 
   authenticate :user, ->(user) { user.admin? } do
     mount RailsAdmin::Engine => "/admin", as: "rails_admin"
@@ -28,6 +28,14 @@ Rails.application.routes.draw do
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
+
+  # API for React app bootstrap (current user data fetched on mount)
+  namespace :api do
+    get "current_user", to: "current_user#show"
+  end
+
+  # Shadcn layout demo (use layout "shadcn" in any controller to use Tailwind + shadcn styling)
+  get "shadcn", to: "demo#shadcn", as: :shadcn_demo
 
   # Defines the root path route ("/")
   root "application#landing"

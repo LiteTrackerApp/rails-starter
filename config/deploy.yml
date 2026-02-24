@@ -62,7 +62,7 @@ aliases:
   dbc: app exec --interactive --reuse "bin/rails dbconsole"
 
 
-# Use a persistent storage volume for sqlite database files and local Active Storage files.
+# Use a persistent storage volume for Active Storage files.
 # Recommended to change this to a mounted volume path that is backed up off server.
 volumes:
   - "rails_tabler_starter_storage:/rails/storage"
@@ -92,22 +92,17 @@ builder:
 #   user: app
 
 # Use accessory services (secrets come from .kamal/secrets).
+# Set DATABASE_URL in .kamal/secrets to point at the db host (e.g. postgres://user:pass@rails_tabler_starter-db:5432/rails_starter_production).
 # accessories:
 #   db:
-#     image: mysql:8.0
+#     image: postgres:16
 #     host: 192.168.0.2
-#     # Change to 3306 to expose port to the world instead of just local network.
-#     port: "127.0.0.1:3306:3306"
+#     port: "127.0.0.1:5432:5432"
 #     env:
-#       clear:
-#         MYSQL_ROOT_HOST: '%'
 #       secret:
-#         - MYSQL_ROOT_PASSWORD
-#     files:
-#       - config/mysql/production.cnf:/etc/mysql/my.cnf
-#       - db/production.sql:/docker-entrypoint-initdb.d/setup.sql
+#         - POSTGRES_PASSWORD
 #     directories:
-#       - data:/var/lib/mysql
+#       - data:/var/lib/postgresql/data
 #   redis:
 #     image: redis:7.0
 #     host: 192.168.0.2

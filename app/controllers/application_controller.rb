@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   def redirect_signed_in_user
     return unless user_signed_in?
 
-    redirect_to @main_space ? space_path(@main_space) : spaces_path
+    redirect_to @main_space ? space_path(@main_space) : shadcn_demo_path
   end
 
   def set_main_space

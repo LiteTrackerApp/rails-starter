@@ -10,12 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_28_031745) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_28_120000) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_catalog.plpgsql"
+
   create_table "app_settings", force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.json "settings", default: {}, null: false
+    t.jsonb "settings", default: {}, null: false
     t.datetime "updated_at", null: false
-    t.index ["settings"], name: "index_app_settings_on_settings"
+    t.index ["settings"], name: "index_app_settings_on_settings", using: :gin
   end
 
   create_table "plans", force: :cascade do |t|
@@ -32,7 +35,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_28_031745) do
   create_table "roles", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name"
-    t.json "permissions", default: "{}", null: false
+    t.jsonb "permissions", default: "{}", null: false
     t.integer "space_id"
     t.string "type"
     t.datetime "updated_at", null: false
@@ -41,10 +44,12 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_28_031745) do
   end
 
   create_table "spaces", force: :cascade do |t|
+    t.string "active_plan_name"
     t.datetime "created_at", null: false
     t.string "name"
     t.integer "status", default: 0
     t.datetime "updated_at", null: false
+    t.integer "users_count", default: 0, null: false
   end
 
   create_table "subscriptions", force: :cascade do |t|

@@ -1,9 +1,9 @@
-<h2 class="mb-4">Appearance</h2>
-<%= form_with(model: user) do |form| %>
+<h2 class="text-lg font-semibold leading-none tracking-tight mb-4">Appearance</h2>
+<%= form_with(model: user, class: "flex flex-col gap-6") do |form| %>
   <% if user.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-      <ul>
+    <div class="rounded-md border border-destructive/50 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+      <h3 class="font-medium"><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h3>
+      <ul class="mt-2 list-disc list-inside">
         <% user.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -11,29 +11,31 @@
     </div>
   <% end %>
 
-  <div class="mb-3">
-    <div class="row g-2">
-      <label class="form-label">Color scheme</label>
+  <div class="space-y-4">
+    <label class="form-label">Color scheme</label>
+    <div class="flex flex-wrap gap-4">
       <% Rails.application.config.app_settings['theme_base']['available'].each do |theme| %>
-        <div class="col-6 col-sm-4">
-          <label class="mb-2">
-            <%=  form.radio_button :color_scheme, theme, class: "form-input" %> <%= theme.capitalize %>
-          </label>
-        </div>
-      <% end %>
-
-      <label class="form-label">Mode</label>
-      <% Rails.application.config.app_settings['color_mode']['available'].each do |mode| %>
-        <div class="col-6 col-sm-4">
-          <label class="mb-2">
-            <%=  form.radio_button :color_mode, mode, class: "form-input" %> <%= mode.capitalize %>
-          </label>
-        </div>
+        <label class="inline-flex items-center gap-2 cursor-pointer">
+          <%= form.radio_button :color_scheme, theme, class: "h-4 w-4 rounded-full border border-input text-primary focus:ring-2 focus:ring-ring focus:ring-offset-2" %>
+          <span class="text-sm font-medium"><%= theme.capitalize %></span>
+        </label>
       <% end %>
     </div>
   </div>
 
-  <div class="form-footer">
-    <%= form.submit "Save", class:"btn btn-primary" %>
+  <div class="space-y-4">
+    <label class="form-label">Mode</label>
+    <div class="flex flex-wrap gap-4">
+      <% Rails.application.config.app_settings['color_mode']['available'].each do |mode| %>
+        <label class="inline-flex items-center gap-2 cursor-pointer">
+          <%= form.radio_button :color_mode, mode, class: "h-4 w-4 rounded-full border border-input text-primary focus:ring-2 focus:ring-ring focus:ring-offset-2" %>
+          <span class="text-sm font-medium"><%= mode.capitalize %></span>
+        </label>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="pt-2">
+    <%= form.submit "Save", class: "btn-primary" %>
   </div>
 <% end %>

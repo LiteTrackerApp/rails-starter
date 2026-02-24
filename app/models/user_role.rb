@@ -11,7 +11,7 @@
 #
 class UserRole < ApplicationRecord
   belongs_to :user
-  belongs_to :space
+  belongs_to :space, counter_cache: :users_count
   belongs_to :role
 
   validate :role_belongs_to_space

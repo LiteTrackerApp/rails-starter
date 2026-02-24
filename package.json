@@ -2,27 +2,55 @@
   "name": "app",
   "private": "true",
   "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/modifiers": "^9.0.0",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
     "@popperjs/core": "^2.11.8",
+    "@radix-ui/react-slot": "^1.2.4",
     "@tabler/core": "^1.4.0",
+    "@tabler/icons-react": "^3.36.1",
+    "@tailwindcss/cli": "^4.0.0",
+    "@tanstack/react-table": "^8.21.3",
     "autoprefixer": "^10.4.20",
     "bootstrap": "^5.3.7",
     "bootstrap-icons": "^1.11.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "jsvectormap": "^1.7.0",
+    "lucide-react": "^0.574.0",
+    "next-themes": "^0.4.6",
     "nodemon": "^3.1.7",
     "postcss": "^8.4.49",
     "postcss-cli": "^11.0.0",
+    "radix-ui": "^1.4.3",
     "rails_admin": "3.3.0",
-    "sass": "^1.82.0"
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "recharts": "2.15.4",
+    "sass": "^1.82.0",
+    "sonner": "^2.0.7",
+    "tailwind-merge": "^3.4.1",
+    "tailwindcss": "^4.0.0",
+    "vaul": "^1.1.2",
+    "zod": "^4.3.6"
   },
   "scripts": {
     "build:css:compile:application": "sass ./app/assets/stylesheets/application.sass.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules",
     "build:css:compile:rails-admin": "sass ./app/assets/stylesheets/rails_admin.scss:./app/assets/builds/rails_admin.css --no-source-map --load-path=node_modules",
-    "build:css:compile": "yarn build:css:compile:application && yarn build:css:compile:rails-admin",
+    "build:css:compile": "yarn build:css:compile:application && yarn build:css:compile:rails-admin && yarn build:css:compile:shadcn",
+    "build:css:compile:shadcn": "npx @tailwindcss/cli -i ./app/assets/stylesheets/shadcn.css -o ./app/assets/builds/shadcn.css",
     "build:css:prefix": "postcss ./app/assets/builds/application.css --use=autoprefixer --output=./app/assets/builds/application.css",
     "build:css": "yarn build:css:compile && yarn build:css:prefix ",
-    "watch:css": "nodemon --watch ./app/assets/stylesheets/ --ext scss --exec \"yarn build:css\""
+    "watch:css": "nodemon --watch ./app/assets/stylesheets/ --ext scss,css --exec \"yarn build:css\""
   },
   "browserslist": [
     "defaults"
-  ]
+  ],
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.18",
+    "@vitejs/plugin-react": "4",
+    "vite": "^5.0.0",
+    "vite-plugin-ruby": "^5.1.0"
+  }
 }

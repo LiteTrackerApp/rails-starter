@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" class="light" style="color-scheme: light;">
+  <head>
+    <title><%= content_for?(:title) ? "#{yield(:title)} - #{Rails.application.class.module_parent.name}" : Rails.application.class.module_parent.name %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="utf-8">
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%= vite_client_tag %>
+    <%= vite_react_refresh_tag %>
+    <%= vite_javascript_tag "shadcn.jsx" %>
+  </head>
+
+  <body class="min-h-screen bg-background font-sans text-foreground antialiased">
+    <div id="shadcn-root">
+      <%= yield %>
+    </div>
+  </body>
+</html>

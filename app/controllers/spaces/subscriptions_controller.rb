@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Spaces::SubscriptionsController < ApplicationController
+  include SpaceLayout
   before_action :set_space, only: %i[index new create]
   before_action :set_plan, only: %i[new]
   before_action :set_active_subscription, only: %i[index]

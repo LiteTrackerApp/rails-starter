@@ -1,45 +1,42 @@
-<h2 class="mb-4">Role</h2>
-<%= form_with model: [@space, role.becomes(Role)] do |form| %>
+<h2 class="text-lg font-semibold leading-none tracking-tight mb-4">Role</h2>
+<%= form_with model: [@space, role.becomes(Role)], class: "flex flex-col gap-6" do |form| %>
   <% form.object = role.becomes(role.class) %>
   <% if role.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(role.errors.count, "error") %> prohibited this role from being saved:</h2>
-      <ul>
+    <div class="rounded-md border border-destructive/50 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+      <h3 class="font-medium"><%= pluralize(role.errors.count, "error") %> prohibited this role from being saved:</h3>
+      <ul class="mt-2 list-disc list-inside">
         <% role.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
-  <div class="form-group mb-3 row">
-    <%= form.label :name, class: "form-label col-3 col-form-label" %>
-    <div class="col-3">
-      <%= form.text_field :name, class:"form-control", ariaDescribedby:"NameHelp", placeholder: "Enter name" %>
-    </div>
+  <div class="grid gap-2">
+    <%= form.label :name, class: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" %>
+    <%= form.text_field :name, class: "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring", placeholder: "Enter name", "aria-describedby": "nameHelp" %>
   </div>
-  <div class="form-group mb-3 row">
-    <%= form.label :value, class: "form-label col-3 col-form-label" %>
-    <div class="col-3">
-      <%= form.text_field :value, class:"form-control", ariaDescribedby:"valueHelp", placeholder: "Enter value", disabled: role.persisted? %>
-    </div>
+  <div class="grid gap-2">
+    <%= form.label :value, class: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" %>
+    <%= form.text_field :value, class: "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50", placeholder: "Enter value", disabled: role.persisted?, "aria-describedby": "valueHelp" %>
   </div>
-  <div class="mb-3">
-    <div class="form-label col-3 col-form-label">Permissions</div>
-    <div>
+  <div class="space-y-3">
+    <div class="text-sm font-medium leading-none">Permissions</div>
+    <div class="flex flex-wrap gap-4">
       <% Role::AVAILABLE_PERMISSIONS.each do |permission| %>
-        <label class="form-check">
-          <%= form.check_box :permissions, { 
+        <label class="flex items-center gap-2 cursor-pointer">
+          <%= form.check_box :permissions, {
             multiple: false,
-            name: "role[permissions][#{permission}]", 
-            class: 'form-check-input',
-            checked: ActiveModel::Type::Boolean.new.cast(role.permissions&.dig(permission)) 
+            name: "role[permissions][#{permission}]",
+            class: "size-4 rounded border border-input text-primary focus:ring-primary",
+            checked: ActiveModel::Type::Boolean.new.cast(role.permissions&.dig(permission))
           }, "true", "false" %>
-          <span class="form-check-label"> <%= permission.humanize %> </span>
+          <span class="text-sm"><%= permission.humanize %></span>
         </label>
       <% end %>
     </div>
   </div>
-  <div class="form-footer">
-    <%= form.submit "Save", class:"btn btn-primary" %>
+  <div class="flex items-center gap-2 pt-2">
+    <%= form.submit "Save", class: "inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" %>
+    <%= link_to "Cancel", space_roles_path(@space), data: { turbo_frame: "_top" }, class: "inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium shadow-sm hover:bg-accent hover:text-accent-foreground" %>
   </div>
 <% end %>

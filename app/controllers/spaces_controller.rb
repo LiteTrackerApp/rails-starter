@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class SpacesController < ApplicationController
+  include SpaceLayout
   before_action :set_space, only: %i[ show edit update destroy ]
   before_action :check_multi_tenant_mode, only: %i[new index]
 
